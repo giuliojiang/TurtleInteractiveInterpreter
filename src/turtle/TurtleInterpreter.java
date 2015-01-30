@@ -73,7 +73,7 @@ public class TurtleInterpreter {
 			case "exit": // exits interpreter
 				System.out.println("Exiting interpreter");
 				exit = true;
-				break;
+				return;
 			default: // invalid command
 				System.out.println(
 						"SKIPPING invalid command: " +
