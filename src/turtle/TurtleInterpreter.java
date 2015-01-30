@@ -33,11 +33,19 @@ public class TurtleInterpreter {
 	 */
 	public void process()
 	{
+		boolean exit = false;
+		
 		// print ready symbol
 		System.out.print(">>> ");
 
 		while (scanner.hasNext())
 		{
+			// exit?
+			if (exit)
+			{
+				return;
+			}
+			
 			// read token
 			String tk = scanner.next();
 
@@ -56,18 +64,16 @@ public class TurtleInterpreter {
 			case "move":
 				processMove();
 				break;
-			case "right":
-				processRight();
-				break;
-			case "left":
-				processLeft();
+			case "rotate":
+				processRotate();
 				break;
 			case "show":
 				processShow();
 				break;
 			case "exit": // exits interpreter
 				System.out.println("Exiting interpreter");
-				return;
+				exit = true;
+				break;
 			default: // invalid command
 				System.out.println(
 						"SKIPPING invalid command: " +
@@ -134,10 +140,10 @@ public class TurtleInterpreter {
 		String name = scanString("new","name");
 
 		// scan x
-		int x = scanInt("new","x");
+		double x = scanDouble("new","x");
 
 		// scan y
-		int y = scanInt("new","y");
+		double y = scanDouble("new","y");
 
 		if (turtle.Main.DEBUG)
 		{
@@ -173,7 +179,7 @@ public class TurtleInterpreter {
 					name, 
 					new TurtleNormal(
 							new Position(x,y), 
-							Direction.NORTH, 
+							new Direction(0), 
 							Pen.UP, 
 							paper));
 			break;
@@ -286,61 +292,24 @@ public class TurtleInterpreter {
 					);
 		}
 	}
-
-	private void processRight()
+	
+	private void processRotate()
 	{
 		// scan name
-		String name = scanString("right","name");
-
+		String name = scanString("rotate","name");
+		
 		// scan angle
-		int angle = scanInt("right","angle");
-		// is angle correct?
-		if ((angle % 45) != 0)
-		{
-			System.out.println(
-					"Error in RIGHT, parameter ANGLE must be " +
-							"a multiple of 45."
-					);
-			angle = scanInt("right","angle");
-		}
-
+		double angle = scanDouble("rotate","angle");
+		
 		// print error if turtle not found
 		if (!turtles.containsKey(name))
 		{
 			printErrorTurtleNotFound(name);
 			return;
 		}
-
+		
 		// perform rotation
-		turtles.get(name).rotate(Rotation.RIGHT, angle);
-	}
-
-	private void processLeft()
-	{
-		// scan name
-		String name = scanString("left","name");
-
-		// scan angle
-		int angle = scanInt("left","angle");
-		// is angle correct?
-		if ((angle % 45) != 0)
-		{
-			System.out.println(
-					"Error in LEFT, parameter ANGLE must be " +
-							"a multiple of 45."
-					);
-			angle = scanInt("left","angle");
-		}
-
-		// print error if turtle not found
-		if (!turtles.containsKey(name))
-		{
-			printErrorTurtleNotFound(name);
-			return;
-		}
-
-		// perform rotation
-		turtles.get(name).rotate(Rotation.LEFT, angle);
+		turtles.get(name).rotate(angle);
 	}
 
 	private void processShow()
@@ -351,7 +320,6 @@ public class TurtleInterpreter {
 	// scans a string and prints debug if necessary
 	private String scanString(String command, String par)
 	{
-		String s;
 		if (scanner.hasNext())
 		{
 			return scanner.next();
@@ -371,7 +339,6 @@ public class TurtleInterpreter {
 	// scans an int and prints debug if necessary
 	private int scanInt(String command, String par)
 	{
-		int a;
 		if (scanner.hasNext())
 		{
 			try
@@ -388,6 +355,39 @@ public class TurtleInterpreter {
 								" must be a number."
 						);
 				return scanInt(command,par);
+			}
+		}
+		else
+		{
+			System.out.println(
+					"Error in " +
+							command.toUpperCase() +
+							", needs parameter " +
+							par.toUpperCase()
+					);
+			return -1;
+		}
+	}
+	
+	// scans a double and prints debug if necessary
+	private double scanDouble(String command, String par)
+	{
+		if (scanner.hasNext())
+		{
+			try
+			{
+				return Double.parseDouble(scanner.next());
+			}
+			catch (NumberFormatException x)
+			{
+				System.out.println(
+						"Error in " +
+								command.toUpperCase() +
+								", parameter " +
+								par.toUpperCase() +
+								" must be a number."
+						);
+				return scanDouble(command,par);
 			}
 		}
 		else

@@ -51,13 +51,9 @@ public class TurtleNormal implements Turtle {
 		penState = Pen.DOWN;
 	}
 
-	public void rotate(Rotation r, int degrees)
+	public void rotate(double degrees)
 	{
-		int steps = Math.abs(degrees / ROTATION_STEP);
-		for (int i = 0; i < steps; i++)
-		{
-			direction = direction.rotate(r);
-		}
+		direction.rotate(degrees);
 	}
 
 	public void changeBrush(char c)
@@ -69,52 +65,19 @@ public class TurtleNormal implements Turtle {
 	{
 		if (penState == Pen.DOWN)
 		{
-			paper.writeChar(position.getX(), position.getY(), brush);
+			paper.writeChar(position, brush);
 		}
 	}
 
 	public void move(int steps)
 	{
-		if (steps == 0)
-		{
-			return;
-		}
-		else
+		while (steps > 0)
 		{
 			Position deltaPosition = direction.getDeltaPosition();
-
-			if (turtle.Main.DEBUG)
-			{
-				System.out.println(
-						"move plus current position" +
-								position
-						);
-			}
-
-			Position nextPosition = position.plus(deltaPosition);
-
-			if (turtle.Main.DEBUG)
-			{
-				System.out.println(
-						"move plus added position" +
-								nextPosition
-						);
-			}
-
-			if (!paper.isWithinBounds(nextPosition.getX(),nextPosition.getY()))
-			{
-				// write
-				writeMark();
-				return;
-			}
-			else
-			{
-				position = nextPosition;
-
-				// write
-				writeMark();
-				move(steps - 1);
-			}
+			Position newPosition = position.plus(deltaPosition);
+			position = newPosition;
+			writeMark();
+			steps -= 1;
 		}
 	}
 

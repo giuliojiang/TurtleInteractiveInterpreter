@@ -34,6 +34,12 @@ public class Paper {
 		return height;
 	}
 
+	public boolean isWithinBounds(double x, double y)
+	{
+		return (0 <= x && x < width)
+				&& (0 <= y && y < height);
+	}
+	
 	public boolean isWithinBounds(int x, int y)
 	{
 		return (0 <= x && x < width)
@@ -46,19 +52,23 @@ public class Paper {
 				&& (0 <= p.getY() && p.getY() < height);
 	}
 
-	public void writeChar(int x, int y, char c)
+	public void writeChar(double x, double y, char c)
 	{
-		if (isWithinBounds(x, y))
+		int xn = (int) Math.round(x);
+		int yn = (int) Math.round(y);
+		if (isWithinBounds(xn, yn))
 		{
-			grid[x][y] = c;
+			grid[xn][yn] = c;
 		}
 	}
 
 	public void writeChar(Position p, char c)
 	{
-		if(isWithinBounds(p.getX(),p.getY()))
+		int xn = (int) Math.round(p.getX());
+		int yn = (int) Math.round(p.getY());
+		if(isWithinBounds(xn,yn))
 		{
-			grid[p.getX()][p.getY()] = c;
+			grid[xn][yn] = c;
 		}
 	}
 

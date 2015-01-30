@@ -13,7 +13,7 @@ public interface Turtle {
 
 	public void putPen();
 
-	public void rotate(Rotation r, int x);
+	public void rotate(double x);
 
 	public void writeMark();
 
