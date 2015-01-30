@@ -18,7 +18,9 @@ public class Main {
 	 * @param args <input> <output>
 	 * @throws FileNotFoundException
 	 */
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
+
+		printWelcome();
 
 		Scanner scanner = null;
 		PrintStream out = null;
@@ -30,13 +32,29 @@ public class Main {
 		}
 		else if (args.length == 1)
 		{
-			scanner = new Scanner(new File(args[0]));
+			try
+			{
+				scanner = new Scanner(new File(args[0]));
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+				return;
+			}
 			out = System.out;
 		}
 		else if (args.length == 2)
 		{
-			scanner = new Scanner(new File(args[0]));
-			out = new PrintStream((args[1]));
+			try
+			{
+				scanner = new Scanner(new File(args[0]));
+				out = new PrintStream((args[1]));
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+				return;
+			}
 		}
 		else
 		{
@@ -48,6 +66,11 @@ public class Main {
 
 		// process commands
 		interpreter.process();
+
+	}
+
+	private static void printWelcome()
+	{
 
 	}
 }
