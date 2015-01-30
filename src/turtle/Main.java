@@ -71,6 +71,18 @@ public class Main {
 
 	private static void printWelcome()
 	{
-
+		System.out.println(
+				"Welcome to the Simple Text Turtle Interpreter!\n" +
+						"Created by Giulio Jiang.\t\t2015\tApache License 2.0\n\n" +
+						"Optional parameters: <input commands> <output file>\n\n" +
+						"Commands:\n" +
+						"paper <width> <height>\t\tCreates new clean paper, removes all turtles.\n" +
+						"new <type> <name> <x> <y>\tAdds turtle of type 'type', 'name' and at position 'x' 'y'. Currently type can only be normal.\n" +
+						"pen <name> <down|up>\t\tLifts or Puts down the pen of turtle 'name'.\n" +
+						"move <name> <distance>\t\tMoves turtle name by 'distance' steps.\n" +
+						"rotate <name> <angle>\t\tRotates turtle 'name' by 'angle' clockwise.\n" +
+						"show\t\t\t\tDisplays or appends to file the paper.\n" +
+						"exit\t\t\t\tExits interpreter, or ends commands sequence\n\n\n"
+						);
 	}
 }
