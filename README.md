@@ -23,6 +23,11 @@ show        			   	Displays or appends to file the paper.
 exit		          		Exits interpreter, or ends commands sequence
 
 
+The program is fully tested and working. However it should not considered 'complete'.
+Here are my plans:
+- Allow to save command sequence entered in interactive console mode
+- Create GUI
+- Add different types of turles.
+
 ```
 
-Executable JAR available
