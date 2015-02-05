@@ -19,6 +19,9 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        // start GUI
+        gui.MainWindow.main(null);
+        
         printWelcome();
 
         Scanner scanner = null;
