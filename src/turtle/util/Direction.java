@@ -1,41 +1,114 @@
 package turtle.util;
 
-public class Direction {
+public enum Direction
+{
 
-    private double d; // angle in degrees
-
-    public Direction(double d) {
-        this.d = d;
-        normalize();
-    }
-
-    private void normalize() {
-        if (d < 0) {
-            d += 360;
-            normalize();
-        }
-        if (d > 360) {
-            d -= 360;
-            normalize();
-        }
-    }
+    // IMPORTANT
+    // the order counts for rotate to work!!!!!!!!!!!!!!!
+    NORTH,
+    NORTH_EAST,
+    EAST,
+    SOUTH_EAST,
+    SOUTH,
+    SOUTH_WEST,
+    WEST,
+    NORTH_WEST;
 
     /**
-     * Rotates CLOCKWISE by given angle
+     * Rotates this Direction LEFT or RIGHT
      * 
-     * @param angle
-     *            to be added, clockwise
+     * 
+     * @param rotation
+     *            Left or Right rotation
+     * @return the new rotated Direction
      */
-    public void rotate(double angle) {
-        d -= angle;
-        normalize();
+    public Direction rotate(Rotation rotation)
+    {
+        if (rotation == Rotation.LEFT)
+        {
+            return Direction.values()[(this.ordinal() - 1 + Direction.values().length)
+                % Direction.values().length];
+        }
+        else
+        {
+            return Direction.values()[(this.ordinal() + 1)
+                % Direction.values().length];
+        }
     }
 
-    public Position getDeltaPosition() {
-        return new Position(Math.cos(rad(d)), Math.sin(rad(d)));
+    public Position getDeltaPosition()
+    {
+        switch (this)
+        {
+            case NORTH:
+                return new Position(0, 1);
+            case NORTH_EAST:
+                return new Position(1, 1);
+            case EAST:
+                return new Position(1, 0);
+            case SOUTH_EAST:
+                return new Position(1, -1);
+            case SOUTH:
+                return new Position(0, -1);
+            case SOUTH_WEST:
+                return new Position(-1, -1);
+            case WEST:
+                return new Position(-1, 0);
+            case NORTH_WEST:
+                return new Position(-1, 1);
+            default:
+                return new Position(0, 0); // impossible!
+        }
     }
-
-    private static double rad(double x) {
-        return x * 0.0174532925;
+    
+    public Direction flipX()
+    {
+        switch (this)
+        {
+            case NORTH:
+                return Direction.NORTH;
+            case NORTH_EAST:
+                return Direction.NORTH_WEST;
+            case EAST:
+                return Direction.WEST;
+            case SOUTH_EAST:
+                return Direction.SOUTH_WEST;
+            case SOUTH:
+                return Direction.SOUTH;
+            case SOUTH_WEST:
+                return Direction.SOUTH_EAST;
+            case WEST:
+                return Direction.EAST;
+            case NORTH_WEST:
+                return Direction.NORTH_EAST;
+            default:
+                return null; // impossible!
+        }
     }
+    
+    public Direction flipY()
+    {
+        switch (this)
+        {
+            case NORTH:
+                return Direction.SOUTH;
+            case NORTH_EAST:
+                return Direction.SOUTH_EAST;
+            case EAST:
+                return Direction.EAST;
+            case SOUTH_EAST:
+                return Direction.NORTH_EAST;
+            case SOUTH:
+                return Direction.NORTH;
+            case SOUTH_WEST:
+                return Direction.NORTH_WEST;
+            case WEST:
+                return Direction.WEST;
+            case NORTH_WEST:
+                return Direction.SOUTH_WEST;
+            default:
+                return null; // impossible!
+        }
+    }
+    
 }

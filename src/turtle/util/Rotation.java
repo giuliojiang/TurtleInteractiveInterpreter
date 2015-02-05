@@ -1,6 +1,7 @@
 package turtle.util;
 
-public enum Rotation {
+public enum Rotation
+{
 
     LEFT, RIGHT;
 

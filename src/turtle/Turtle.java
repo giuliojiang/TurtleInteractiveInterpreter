@@ -3,7 +3,8 @@ package turtle;
 import turtle.util.Position;
 import turtle.util.Rotation;
 
-public interface Turtle {
+public interface Turtle
+{
 
     public void changeBrush(char c);
 
@@ -13,10 +14,14 @@ public interface Turtle {
 
     public void putPen();
 
-    public void rotate(double x);
+    public void rotate(Rotation r, int x);
 
     public void writeMark();
+    
+    public String status();
+    
+    public String getName();
 
-    public Position getPosition();
+    // public Position getPosition();
 
 }

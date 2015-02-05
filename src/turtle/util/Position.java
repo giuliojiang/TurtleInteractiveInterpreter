@@ -1,9 +1,10 @@
 package turtle.util;
 
-public class Position {
+public class Position
+{
 
-    private final double x;
-    private final double y;
+    private int x;
+    private int y;
 
     /**
      * Construct a Position from x and y
@@ -11,17 +12,36 @@ public class Position {
      * @param x
      * @param y
      */
-    public Position(double x, double y) {
+    public Position(int x, int y)
+    {
         this.x = x;
         this.y = y;
     }
 
-    public double getX() {
+    public int getX()
+    {
         return x;
     }
 
-    public double getY() {
+    public int getY()
+    {
         return y;
+    }
+
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+
+    public void setY(int y)
+    {
+        this.y = y;
+    }
+
+    public void set(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -31,11 +51,18 @@ public class Position {
      *            The Position to be added
      * @return a new Position which is the sum
      */
-    public Position plus(Position p) {
+    public Position plus(Position p)
+    {
         return new Position(this.x + p.getX(), this.y + p.getY());
     }
+    
+    public Position minus(Position p)
+    {
+        return new Position(this.x - p.getX(), this.y - p.getY());
+    }
 
-    public String toString() {
+    public String toString()
+    {
         return "(" + x + "," + y + ")";
     }
 

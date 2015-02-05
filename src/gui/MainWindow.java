@@ -1,10 +1,11 @@
 package gui;
 
-import java.awt.EventQueue;
+import java.awt.event.WindowEvent;
 import java.io.PrintStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -19,7 +20,7 @@ public class MainWindow extends JFrame
     /**
      * Launch the application.
      */
-    public static void main(String[] args)
+    public static MainWindow main()
     {
         // EventQueue.invokeLater(new Runnable()
         // {
@@ -41,12 +42,13 @@ public class MainWindow extends JFrame
         {
             MainWindow frame = new MainWindow();
             frame.setVisible(true);
+            return frame;
         }
         catch (Exception e)
         {
             e.printStackTrace();
+            return null;
         }
-
     }
 
     /**
@@ -74,10 +76,45 @@ public class MainWindow extends JFrame
             txtrDisplay));
         System.setOut(printStream);
         System.setErr(printStream);
+        JScrollPane scroll = new JScrollPane (txtrDisplay, 
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+         splitPane.add(scroll);
+         splitPane.setVisible (true);
+
 
         txtCommands = new JTextField();
-        txtCommands.setText("Commands");
+        txtCommands.setText("");
         splitPane.setRightComponent(txtCommands);
         txtCommands.setColumns(10);
+        TexfFieldStreamer ts = new TexfFieldStreamer(txtCommands);
+        txtCommands.addActionListener(ts);
+        System.setIn(ts);
+        
+    }
+    
+    public void setTxtCommandsText(String s)
+    {
+        txtCommands.setText(s);
+        setTxtCommandsCursorToEnd();
+    }
+    
+    public void setTxtCommandsCursorToEnd()
+    {
+        txtCommands.setCaretPosition(txtCommands.getDocument().getLength());
+    }
+    
+    public void printDone()
+    {
+        System.out.println("OK!");
+    }
+    
+    public void closeAndExit()
+    {
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+    
+    public void setWindowTitle(String s)
+    {
+        this.setTitle(s);
     }
 }
