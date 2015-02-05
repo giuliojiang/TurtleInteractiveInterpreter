@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.io.PrintStream;
 
@@ -70,6 +72,7 @@ public class MainWindow extends JFrame
         contentPane.add(splitPane);
 
         JTextArea txtrDisplay = new JTextArea();
+        txtrDisplay.setToolTipText("Output display");
         txtrDisplay.setText("");
         splitPane.setLeftComponent(txtrDisplay);
         PrintStream printStream = new PrintStream(new CustomOutputStream(
@@ -80,9 +83,12 @@ public class MainWindow extends JFrame
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
          splitPane.add(scroll);
          splitPane.setVisible (true);
+         txtrDisplay.setFont(new Font("Courier New", Font.PLAIN, 12));
+         txtrDisplay.setForeground(Color.BLACK);
 
 
         txtCommands = new JTextField();
+        txtCommands.setToolTipText("Command prompt field");
         txtCommands.setText("");
         splitPane.setRightComponent(txtCommands);
         txtCommands.setColumns(10);
