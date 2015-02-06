@@ -63,7 +63,7 @@ public class MainWindow extends JFrame
         txtrDisplay.setText("");
         splitPane.setLeftComponent(txtrDisplay);
         JScrollPane scroll = new JScrollPane (txtrDisplay, 
-            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
          splitPane.add(scroll);
          splitPane.setVisible (true);
          txtrDisplay.setFont(new Font("Courier New", Font.PLAIN, 12));
