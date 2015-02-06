@@ -18,28 +18,13 @@ public class MainWindow extends JFrame
 
     private JPanel contentPane;
     private JTextField txtCommands;
+    private JTextArea txtrDisplay;
 
     /**
      * Launch the application.
      */
     public static MainWindow main()
     {
-        // EventQueue.invokeLater(new Runnable()
-        // {
-        // public void run()
-        // {
-        // try
-        // {
-        // MainWindow frame = new MainWindow();
-        // frame.setVisible(true);
-        // }
-        // catch (Exception e)
-        // {
-        // e.printStackTrace();
-        // }
-        // }
-        // });
-
         try
         {
             MainWindow frame = new MainWindow();
@@ -52,6 +37,8 @@ public class MainWindow extends JFrame
             return null;
         }
     }
+    
+    
 
     /**
      * Create the frame.
@@ -71,14 +58,10 @@ public class MainWindow extends JFrame
         splitPane.setBounds(12, 12, 747, 494);
         contentPane.add(splitPane);
 
-        JTextArea txtrDisplay = new JTextArea();
+        this.txtrDisplay = new JTextArea();
         txtrDisplay.setToolTipText("Output display");
         txtrDisplay.setText("");
         splitPane.setLeftComponent(txtrDisplay);
-        PrintStream printStream = new PrintStream(new CustomOutputStream(
-            txtrDisplay));
-        System.setOut(printStream);
-        System.setErr(printStream);
         JScrollPane scroll = new JScrollPane (txtrDisplay, 
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
          splitPane.add(scroll);
@@ -122,5 +105,13 @@ public class MainWindow extends JFrame
     public void setWindowTitle(String s)
     {
         this.setTitle(s);
+    }
+    
+    public void catchPrintStream()
+    {
+        PrintStream printStream = new PrintStream(new CustomOutputStream(
+                txtrDisplay));
+            System.setOut(printStream);
+            System.setErr(printStream);
     }
 }
