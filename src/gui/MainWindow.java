@@ -46,7 +46,7 @@ public class MainWindow extends JFrame
     public MainWindow()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 773, 543);
+        setBounds(100, 100, 1000, 600);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -55,7 +55,7 @@ public class MainWindow extends JFrame
         JSplitPane splitPane = new JSplitPane();
         splitPane.setResizeWeight(0.9);
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        splitPane.setBounds(12, 12, 747, 494);
+        splitPane.setBounds(12, 12, 950, 550);
         contentPane.add(splitPane);
 
         this.txtrDisplay = new JTextArea();
