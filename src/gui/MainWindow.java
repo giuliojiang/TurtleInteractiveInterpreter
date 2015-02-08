@@ -22,29 +22,17 @@ public class MainWindow extends JFrame
 
     private JPanel contentPane;
     private JTextField txtCommands;
+<<<<<<< HEAD
     JLabel lblGraphic;
+=======
+    private JTextArea txtrDisplay;
+>>>>>>> 566805f60917e68f42fb9ea56fba4c073aed7881
 
     /**
      * Launch the application.
      */
     public static MainWindow main()
     {
-        // EventQueue.invokeLater(new Runnable()
-        // {
-        // public void run()
-        // {
-        // try
-        // {
-        // MainWindow frame = new MainWindow();
-        // frame.setVisible(true);
-        // }
-        // catch (Exception e)
-        // {
-        // e.printStackTrace();
-        // }
-        // }
-        // });
-
         try
         {
             MainWindow frame = new MainWindow();
@@ -57,6 +45,8 @@ public class MainWindow extends JFrame
             return null;
         }
     }
+    
+    
 
     /**
      * Create the frame.
@@ -64,7 +54,11 @@ public class MainWindow extends JFrame
     public MainWindow()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
         setBounds(100, 100, 999, 604);
+=======
+        setBounds(100, 100, 1000, 600);
+>>>>>>> 566805f60917e68f42fb9ea56fba4c073aed7881
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -73,6 +67,10 @@ public class MainWindow extends JFrame
         JSplitPane splitPane = new JSplitPane();
         splitPane.setResizeWeight(0.9);
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+<<<<<<< HEAD
+=======
+        splitPane.setBounds(12, 12, 950, 550);
+>>>>>>> 566805f60917e68f42fb9ea56fba4c073aed7881
         contentPane.add(splitPane);
         
         JSplitPane splitPane2 = new JSplitPane();
@@ -82,9 +80,10 @@ public class MainWindow extends JFrame
         splitPane.setLeftComponent(splitPane2);
         
 
-        JTextArea txtrDisplay = new JTextArea();
+        this.txtrDisplay = new JTextArea();
         txtrDisplay.setToolTipText("Output display");
         txtrDisplay.setText("");
+<<<<<<< HEAD
         splitPane2.setLeftComponent(txtrDisplay);
         PrintStream printStream = new PrintStream(new CustomOutputStream(
             txtrDisplay));
@@ -94,6 +93,13 @@ public class MainWindow extends JFrame
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
          splitPane2.add(scroll);
          splitPane2.setVisible (true);
+=======
+        splitPane.setLeftComponent(txtrDisplay);
+        JScrollPane scroll = new JScrollPane (txtrDisplay, 
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+         splitPane.add(scroll);
+         splitPane.setVisible (true);
+>>>>>>> 566805f60917e68f42fb9ea56fba4c073aed7881
          txtrDisplay.setFont(new Font("Courier New", Font.PLAIN, 12));
          txtrDisplay.setForeground(Color.BLACK);
          
@@ -141,5 +147,13 @@ public class MainWindow extends JFrame
     public void setWindowTitle(String s)
     {
         this.setTitle(s);
+    }
+    
+    public void catchPrintStream()
+    {
+        PrintStream printStream = new PrintStream(new CustomOutputStream(
+                txtrDisplay));
+            System.setOut(printStream);
+            System.setErr(printStream);
     }
 }

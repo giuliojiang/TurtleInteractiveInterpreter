@@ -26,8 +26,6 @@ public class Main
     public static void main(String[] args) throws FileNotFoundException
     {
 
-        MainWindow gui = MainWindow.main();
-        gui.setWindowTitle("Turtle Interactive");
 
         try
         {
@@ -55,16 +53,23 @@ public class Main
         Scanner scanner = null;
         PrintStream out = null;
 
+        MainWindow gui;
+        gui = MainWindow.main();
+        gui.setWindowTitle("Turtle Interactive");
+        
         if (args.length == 0)
         {
+        	gui.catchPrintStream();
             scanner = new Scanner(System.in);
             out = System.out;
         } else if (args.length == 1)
         {
+            gui.catchPrintStream();
             scanner = new Scanner(new File(args[0]));
             out = System.out;
         } else if (args.length == 2)
         {
+        	gui.setVisible(false);
             scanner = new Scanner(new File(args[0]));
             out = new PrintStream((args[1]));
         } else
@@ -80,6 +85,12 @@ public class Main
         
         // process commands
         interpreter.process();
+        
+        // close
+        if (args.length == 2)
+        {
+        	gui.closeAndExit();
+        }
 
     }
 }
