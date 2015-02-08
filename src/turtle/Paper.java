@@ -92,7 +92,7 @@ public class Paper
         return out.toString();
     }
 
-    public Image toImage()
+    public BufferedImage toImage()
     {
         BufferedImage out = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         
@@ -102,13 +102,13 @@ public class Paper
             {
                 if (grid[x][y] != ' ')
                 {
-                    out.setRGB(x, y, 0);
+                    out.setRGB(x, height - y - 1, 0);
                 } else
                 {
-                    out.setRGB(x, y, 
+                    out.setRGB(x, height - y - 1, 
                         (255) + 
-                        (255 + 256) + 
-                        (255 + 256 * 256));
+                        (255 * 256) + 
+                        (255 * 256 * 256));
                 }
             }
         }
