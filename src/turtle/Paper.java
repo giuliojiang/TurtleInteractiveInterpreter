@@ -1,6 +1,7 @@
 package turtle;
 
-import java.util.HashMap;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import turtle.util.Position;
 
@@ -91,6 +92,29 @@ public class Paper
         return out.toString();
     }
 
+    public Image toImage()
+    {
+        BufferedImage out = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (grid[x][y] != ' ')
+                {
+                    out.setRGB(x, y, 0);
+                } else
+                {
+                    out.setRGB(x, y, 
+                        (255) + 
+                        (255 + 256) + 
+                        (255 + 256 * 256));
+                }
+            }
+        }
+        
+        return out;
+    }
     
 
 }

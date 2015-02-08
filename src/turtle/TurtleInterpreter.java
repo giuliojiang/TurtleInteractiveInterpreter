@@ -14,7 +14,7 @@ import turtle.util.Rotation;
 public class TurtleInterpreter
 {
 
-    private static final int DEFAULT_PAPER_SIZE = 10;
+    private static final int DEFAULT_PAPER_SIZE = 100;
 
     private Scanner scanner;
     private HashMap<String, Turtle> turtles;
@@ -466,7 +466,8 @@ public class TurtleInterpreter
      */
     private void processShow()
     {
-        out.println(paper);
+        gui.drawPaper(paper.toImage());
+        // out.println(paper);
     }
 
     /**
